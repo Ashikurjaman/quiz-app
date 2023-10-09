@@ -78,6 +78,7 @@ let currentQuestionIndex = 0;
 let score = 0;
 
 function startQuiz(){
+    resetState();
     currentQuestionIndex= 0;
     score=0;
     nextBtn.innerHTML='Next';
@@ -85,7 +86,7 @@ function startQuiz(){
 }
 
 function showQuiz(){
-    resetState();
+    
     let currentQuestiion =question[currentQuestionIndex];
 
     let questionNo = currentQuestionIndex + 1;
