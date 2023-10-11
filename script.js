@@ -40,7 +40,7 @@ const question = [
                 text:'Kalahari',correct:false
             },
             {
-                text:'Gobi',correct:true
+                text:'Gobi',correct:false
             },
             {
                 text:'Sahara',correct:false
@@ -116,6 +116,7 @@ function selectAnswer(e){
     const isCorrect = selectedBtn.dataset.correct === 'true';
     if(isCorrect){
         selectedBtn.classList.add('correct');
+        score++;
 
     }else{
         selectedBtn.classList.add('incorrect');
@@ -123,10 +124,38 @@ function selectAnswer(e){
     Array.from(answerButton.children).forEach(button=>{
         if(button.dataset.correct === 'true'){
             button.classList.add('correct');
+            button.style.display ="none";
         }
         button.disabled = true;
+        button.style.display ="none";
+        
     });
     nextBtn.style.display ="block";
+    
 }
+
+function showScore()
+{
+    resetState();
+    questionElement.innerHTML = `You score ${score} out of ${question.length}!`;
+    nextBtn.innerHTML = "play Again";
+    nextBtn.style.display="block";
+}
+function handleNextButton(){
+    currentQuestionIndex ++;
+    if(currentQuestionIndex < question.length){
+        showQuiz();
+    }else{
+        showScore();
+    }
+}
+
+nextBtn.addEventListener('click', ()=>{
+    if(currentQuestionIndex < question.length){
+        handleNextButton();
+    }else{
+        startQuiz();
+    }
+})
 
 startQuiz();
